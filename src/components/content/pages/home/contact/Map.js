@@ -1,7 +1,9 @@
 import {GoogleMap, Marker, useJsApiLoader} from "@react-google-maps/api";
 import {Alert} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('map');
 
     const {isLoaded} = useJsApiLoader({
         id: 'google-map-script',
@@ -18,7 +20,7 @@ export default () => {
             <Marker position={{lat: 55.7033, lng: 21.1443}}/>
 
         </GoogleMap>
-    ) : <Alert severity='error'>Couldn't load map.</Alert>
+    ) : <Alert severity='error'>{t('map')}</Alert>
 
 }
 

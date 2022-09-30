@@ -1,0 +1,95 @@
+{
+  "footer": {
+    "copyright": "Copyright",
+    "allRightsReserved": "All rights reserved."
+  },
+  "header": {
+    "home": "Home",
+    "addNewProject": "Add new project",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "login": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "newToConstruction": "New to construction?",
+    "registration": "Registration"
+  },
+  "registration": {
+    "username": "Username",
+    "usernameMin": "Username should be not less than 3 letters.",
+    "usernameMax": "Username should be not more than 20 letters.",
+    "password": "Password",
+    "passwordMin": "Password should be not less than 5 symbols.",
+    "passwordMax": "Password should be not more than 20 symbols.",
+    "repeatPassword": "Repeat password",
+    "passwordsNotEqual": "Passwords don't match!",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "repeatPasswordRequired": "Password is required.",
+    "registration": "Registration",
+    "register": "Register"
+  },
+  "project": {
+    "title": "Title",
+    "description": "Description",
+    "titleRequired": "Title is required.",
+    "descriptionRequired": "Description is required.",
+    "titleMin": "Title should be not less than 3 symbols.",
+    "titleMax": "Title should be not more than 50 symbols.",
+    "notificationSuccess": "Project created successfully!",
+    "notificationError": "Project could not be created! If this problem repeats, contact local administrator.",
+    "addNewProject": "Add new project",
+    "selectedPhotos": "Selected photos:",
+    "add": "Add",
+    "upload": "Upload"
+  },
+  "aboutUs": {
+    "aboutUs": "ABOUT US"
+  },
+  "information": {
+    "contactUs": "CONTACT US",
+    "followUs": "FOLLOW US",
+    "address": "Klaipeda, Lithuania"
+  },
+  "map": {
+    "map": "Couldn't load map."
+  },
+  "email": {
+    "yourEmail": "Your email",
+    "topic": "Topic",
+    "message": "Message",
+    "invalidEmail": "Email is not valid.",
+    "emailRequired": "Email is required.",
+    "topicMin": "Topic should be not less than 5 symbols.",
+    "topicMax": "Topic should be not more than 50 symbols.",
+    "topicRequired": "Topic is required.",
+    "messageMax": "Message should be not more than 250 symbols.",
+    "messageRequired": "Message is required.",
+    "notificationSuccess": "Your email sent successfully!",
+    "notificationError": "We could not your send email! If this problem repeats, contact local administrator.",
+    "emailUs": "Email us",
+    "send": "Send"
+  },
+  "projects": {
+    "getProjectsError": "Projects could not be displayed! If this problem repeats, contact local administrator.",
+    "emptyProjectsError": "No projects were added!",
+    "ourProjects": "OUR PROJECTS"
+  },
+  "detailedProject": {
+    "title": "Title",
+    "description": "Description",
+    "titleRequired": "Title is required.",
+    "descriptionRequired": "Description is required.",
+    "titleMin": "Title should be not less than 3 symbols.",
+    "titleMax": "Title should be not more than 50 symbols.",
+    "updateProjectNotificationError": "Project could not be updated! If this problem repeats, contact local administrator.",
+    "deletePhotoNotificationError": "Photo could not be deleted! If this problem repeats, contact local administrator.",
+    "updatePhotoNotificationError": "Photo could not be updated! If this problem repeats, contact local administrator.",
+    "loadingProjectNotificationError": "Project could not be displayed! If this problem repeats, contact local administrator.",
+    "update": "Update"
+  }
+}

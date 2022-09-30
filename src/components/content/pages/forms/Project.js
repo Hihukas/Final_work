@@ -5,18 +5,20 @@ import {createProject} from "../../../../api/projectApi";
 import {useState} from "react";
 import {PhotoCamera} from "@mui/icons-material";
 import Input from "./Input";
-
-
-const projectValidationSchema = Yup.object().shape({
-    title: Yup.string()
-        .min(3, 'Title should be not less than 3 symbols.')
-        .max(50, 'Title should be not more than 50 symbols.')
-        .required('Title is required.'),
-    description: Yup.string()
-        .required('Description is required.')
-})
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('project');
+
+    const projectValidationSchema = Yup.object().shape({
+        title: Yup.string()
+            .min(3, `${t('titleMin')}`)
+            .max(50, `${t('titleMax')}`)
+            .required(`${t('titleRequired')}`),
+        description: Yup.string()
+            .required(`${t('descriptionRequired')}`)
+    });
+
     const [notification, setNotification] = useState({isVisible: false});
     const [selectedPhoto, setSelectedPhoto] = useState([]);
     const [isPhotoPicked, setIsPhotoPicked] = useState(false);
@@ -49,7 +51,7 @@ export default () => {
                 formikHelpers.resetForm();
                 setNotification({
                     isVisible: true,
-                    message: 'Project created successfully!',
+                    message: `${t('notificationSuccess')}`,
                     severity: 'success'
                 });
 
@@ -59,7 +61,7 @@ export default () => {
             })
             .catch(() => setNotification({
                 isVisible: true,
-                message: 'Project could not be created! If this problem repeats, contact local administrator.',
+                message: `${t('notificationError')}`,
                 severity: 'error'
             }))
             .finally(() => formikHelpers.setSubmitting(false));
@@ -89,16 +91,16 @@ export default () => {
 
                                 <Typography variant="h6"
                                             sx={{textAlign: 'left'}}>
-                                    Add new project</Typography>
+                                    {t('addNewProject')}</Typography>
 
                                 <Input name="title"
-                                       label="Title"
-                                       placeholder="Title"
+                                       label={t('title')}
+                                       placeholder={t('title')}
                                        error={props.touched.title && !!props.errors.title}/>
 
                                 <Input name="description"
-                                       label="Description"
-                                       placeholder="Description"
+                                       label={t('description')}
+                                       placeholder={t('description')}
                                        error={props.touched.description && !!props.errors.description}
                                        multiline/>
 
@@ -107,7 +109,7 @@ export default () => {
                                     {isPhotoPicked ?
 
                                         <Box>
-                                            <Typography>Selected photos:</Typography>
+                                            <Typography>{t('selectedPhotos')}</Typography>
 
                                             {
                                                 selectedPhoto.map((photo, index) => {
@@ -126,7 +128,7 @@ export default () => {
 
                                     <Button variant="contained" component="label">
 
-                                        <PhotoCamera sx={{mr: 2}}/> Upload
+                                        <PhotoCamera sx={{mr: 2}}/> {t('upload')}
 
                                         <input hidden accept="image/*" multiple type="file" name="multipartFile"
                                                id="multipartFile"
@@ -155,7 +157,7 @@ export default () => {
                                                     type="submit"
                                                     color="primary"
                                             >
-                                                Submit</Button>
+                                                {t('add')}</Button>
                                     }
 
                                 </Box> :
@@ -174,5 +176,3 @@ export default () => {
         </Box>
     );
 }
-
-export {projectValidationSchema}

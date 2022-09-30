@@ -9,10 +9,22 @@ import UpdateIcon from '@mui/icons-material/Update';
 import axios from "axios";
 import {deletePhoto, getPhotosByProjectId, updatePhoto} from "../../../../api/photoApi";
 import {Form, Formik} from "formik";
-import {projectValidationSchema} from "../forms/Project";
 import Input from "../forms/Input";
+import * as Yup from "yup";
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('detailedProject');
+
+    const projectValidationSchema = Yup.object().shape({
+        title: Yup.string()
+            .min(3, `${t('titleMin')}`)
+            .max(50, `${t('titleMax')}`)
+            .required(`${t('titleRequired')}`),
+        description: Yup.string()
+            .required(`${t('descriptionRequired')}`)
+    });
+
     const {projectId} = useParams();
     const [loading, setLoading] = useState(true);
     const [loadingNotification, setLoadingNotification] = useState({isVisible: false});
@@ -38,7 +50,7 @@ export default () => {
             })
             .catch(() => setUpdateProjectNotification({
                 isVisible: true,
-                message: 'Project could not be updated! If this problem repeats, contact local administrator.',
+                message: `${t('updateProjectNotificationError')}`,
                 severity: 'error'
             }))
             .finally(() => {
@@ -53,7 +65,7 @@ export default () => {
             .then(() => setPhotos((current) => current.filter((photo) => photo.id !== id)))
             .catch(() => setDeleteNotification({
                 isVisible: true,
-                message: 'Photo could not be deleted! If this problem repeats, contact local administrator.',
+                message: `${t('deletePhotoNotificationError')}`,
                 severity: 'error'
             }))
     }
@@ -106,7 +118,7 @@ export default () => {
             })
             .catch(() => setUpdatePhotoNotification({
                 isVisible: true,
-                message: 'Photo could not be updated! If this problem repeats, contact local administrator.',
+                message: `${t('updatePhotoNotificationError')}`,
                 severity: 'error'
             }))
     }
@@ -122,7 +134,7 @@ export default () => {
             }))
             .catch(() => setLoadingNotification({
                 isVisible: true,
-                message: 'Project could not be displayed! If this problem repeats, contact local administrator.',
+                message: `${t('loadingProjectNotificationError')}`,
                 severity: 'error'
             }))
             .finally(() => setLoading(false));
@@ -239,8 +251,8 @@ export default () => {
                                             }}>
 
                                                 <Input name="title"
-                                                       label="Title"
-                                                       placeholder="Title"
+                                                       label={t('title')}
+                                                       placeholder={t('title')}
                                                        error={props.touched.title && !!props.errors.title}
                                                        sx={{width: '750px'}}/>
 
@@ -268,8 +280,8 @@ export default () => {
                                             }}>
 
                                                 <Input name="description"
-                                                       label="Description"
-                                                       placeholder="Description"
+                                                       label={t('description')}
+                                                       placeholder={t('description')}
                                                        error={props.touched.description && !!props.errors.description}
                                                        multiline
                                                        sx={{width: '750px'}}/>
@@ -292,7 +304,7 @@ export default () => {
                                                         type="submit"
                                                         color="primary"
                                                 >
-                                                    Submit</Button>
+                                                    {t('update')}</Button>
 
                                             </Box>
 

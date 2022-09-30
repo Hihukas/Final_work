@@ -3,18 +3,26 @@ import Input from "./Input";
 import * as Yup from 'yup';
 import {Button, CircularProgress, Stack, Box, Typography, Paper} from "@mui/material";
 import {NavLink} from "react-router-dom";
-
-const loginValidationSchema = Yup.object().shape({
-    username: Yup.string()
-        .required('Username is required.'),
-    password: Yup.string()
-        .required('Password is required.')
-})
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('login');
+
+    const loginValidationSchema = Yup.object().shape({
+        username: Yup.string()
+            .required(`${t('usernameRequired')}`),
+        password: Yup.string()
+            .required(`${t('passwordRequired')}`)
+    });
 
     return (
-        <Box sx={{height: 'calc(100vh - 50px)', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
+        <Box sx={{
+            height: 'calc(100vh - 50px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#fff'
+        }}>
 
             <Formik initialValues={{username: '', password: ''}}
                     onSubmit={(values, formikHelpers) => {
@@ -40,16 +48,16 @@ export default () => {
 
                                 <Typography variant="h6"
                                             sx={{textAlign: 'left'}}>
-                                    Login</Typography>
+                                    {t('login')}</Typography>
 
                                 <Input name="username"
-                                       label="Username"
-                                       placeholder="Username"
+                                       label={t('username')}
+                                       placeholder={t('username')}
                                        error={props.touched.username && !!props.errors.username}/>
 
                                 <Input name="password"
-                                       label="Password"
-                                       placeholder="Password"
+                                       label={t('password')}
+                                       placeholder={t('password')}
                                        error={props.touched.password && !!props.errors.password}
                                        type="password"/>
 
@@ -63,12 +71,12 @@ export default () => {
                                                 variant="contained"
                                                 type="submit"
                                                 color="primary">
-                                            Login</Button>
+                                            {t('login')}</Button>
                                 }
 
                                 <Box variant="outlined" sx={{mt: 2, display: 'flex', justifyContent: 'end'}}>
 
-                                    <Typography sx={{m: 1}}>New to construction?</Typography>
+                                    <Typography sx={{m: 1}}>{t('newToConstruction')}</Typography>
                                     <Button size="medium"
                                             variant="contained"
                                             type="submit"
@@ -76,7 +84,7 @@ export default () => {
                                             to="/registration"
                                             component={NavLink}
                                     >
-                                        Registration</Button>
+                                        {t('registration')}</Button>
 
                                 </Box>
 

@@ -2,25 +2,33 @@ import {Form, Formik} from "formik";
 import Input from "./Input";
 import * as Yup from 'yup';
 import {Button, CircularProgress, Stack, Box, Typography, Paper} from "@mui/material";
-
-const registrationValidationSchema = Yup.object().shape({
-    username: Yup.string()
-        .min(3, 'Username should be not less than 3 letters.')
-        .max(20, 'Username should be not more than 20 letters.')
-        .required('Username is required.'),
-    password: Yup.string()
-        .min(5, 'Password should be not less than 5 symbols.')
-        .max(20, 'Password should be not more than 20 symbols.')
-        .required('Password is required.'),
-    repeatPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], "Passwords don't match!")
-        .required('Repeat password is required.')
-})
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('registration');
+
+    const registrationValidationSchema = Yup.object().shape({
+        username: Yup.string()
+            .min(3, `${t('usernameMin')}`)
+            .max(20, `${t('usernameMax')}`)
+            .required(`${t('usernameRequired')}`),
+        password: Yup.string()
+            .min(5, `${t('passwordMin')}`)
+            .max(20, `${t('passwordMax')}`)
+            .required(`${t('passwordRequired')}`),
+        repeatPassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], `${t('passwordsNotEqual')}`)
+            .required(`${t('repeatPasswordRequired')}`)
+    });
 
     return (
-        <Box sx={{height: 'calc(100vh - 50px)', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
+        <Box sx={{
+            height: 'calc(100vh - 50px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#fff'
+        }}>
 
             <Formik initialValues={{username: '', password: '', repeatPassword: ''}}
                     onSubmit={(values, formikHelpers) => {
@@ -45,22 +53,22 @@ export default () => {
 
                                 <Typography variant="h6"
                                             sx={{textAlign: 'left'}}>
-                                    Registration</Typography>
+                                    {t('registration')}</Typography>
 
                                 <Input name="username"
-                                       label="Username"
-                                       placeholder="Username"
+                                       label={t('username')}
+                                       placeholder={t('username')}
                                        error={props.touched.username && !!props.errors.username}/>
 
                                 <Input name="password"
-                                       label="Password"
-                                       placeholder="Password"
+                                       label={t('password')}
+                                       placeholder={t('password')}
                                        error={props.touched.password && !!props.errors.password}
                                        type="password"/>
 
                                 <Input name="repeatPassword"
-                                       label="Repeat password"
-                                       placeholder="Repeat password"
+                                       label={t('repeatPassword')}
+                                       placeholder={t('repeatPassword')}
                                        error={props.touched.repeatPassword && !!props.errors.repeatPassword}
                                        type="password"/>
 
@@ -73,7 +81,7 @@ export default () => {
                                                 variant="contained"
                                                 type="submit"
                                                 color="primary">
-                                            Register</Button>
+                                            {t('register')}</Button>
                                 }
                             </Box>
 

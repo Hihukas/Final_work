@@ -9,6 +9,7 @@ import {autoPlay} from "react-swipeable-views-utils";
 import Views from "react-swipeable-views";
 import {useTheme} from "@mui/material/styles";
 import * as React from "react";
+import {useTranslation} from "react-i18next";
 
 const AutoPlayViews = autoPlay(Views);
 
@@ -20,6 +21,7 @@ export default () => {
     const [photos, setPhotos] = useState([]);
     const theme = useTheme();
     const [activePhoto, setActivePhoto] = useState(0);
+    const {t} = useTranslation('projects');
 
     const handleStepChange = (photo) => {
         setActivePhoto(photo);
@@ -37,7 +39,7 @@ export default () => {
                 if (projectsData.length === 0) {
                     setEmptyProjectsNotification({
                         isVisible: true,
-                        message: 'No projects were added!',
+                        message: `${t('emptyProjectsError')}`,
                         severity: 'error'
                     });
                 } else {
@@ -47,7 +49,7 @@ export default () => {
             }))
             .catch(() => setGetProjectsNotification({
                 isVisible: true,
-                message: 'Projects could not be displayed! If this problem repeats, contact local administrator.',
+                message: `${t('getProjectsError')}`,
                 severity: 'error'
             }))
             .finally(() => setLoading(false));
@@ -73,7 +75,7 @@ export default () => {
                         display: 'flex',
                         justifyContent: 'center',
                         borderBottom: '2px solid #1565c0'
-                    }}>OUR PROJECTS</Typography>
+                    }}>{t('ourProjects')}</Typography>
 
                 </Box>
 

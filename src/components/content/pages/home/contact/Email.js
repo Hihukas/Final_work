@@ -4,21 +4,24 @@ import {Button, CircularProgress, Stack, Box, Typography, Alert, Paper} from "@m
 import {useState} from "react";
 import Input from "../../forms/Input";
 import {sendEmail} from "../../../../../api/emailApi";
-
-const emailValidationSchema = Yup.object().shape({
-    email: Yup.string()
-        .email('Email is not valid.')
-        .required('Email is required'),
-    topic: Yup.string()
-        .min(5, 'Topic should be not less than 5 symbols.')
-        .max(50, 'Topic should be not more than 50 symbols.')
-        .required('Topic is required.'),
-    message: Yup.string()
-        .max(250, 'Message should be not more than 250 symbols.')
-        .required('Message is required.')
-})
+import {useTranslation} from "react-i18next";
 
 export default () => {
+    const {t} = useTranslation('email');
+
+    const emailValidationSchema = Yup.object().shape({
+        email: Yup.string()
+            .email(`${t('invalidEmail')}`)
+            .required(`${t('emailRequired')}`),
+        topic: Yup.string()
+            .min(5, `${t('topicMin')}`)
+            .max(50, `${t('topicMax')}`)
+            .required(`${t('topicRequired')}`),
+        message: Yup.string()
+            .max(250, `${t('messageMax')}`)
+            .required(`${t('messageRequired')}`)
+    });
+
     const [notification, setNotification] = useState({isVisible: false});
 
     const onSendEmail = (formikValues, formikHelpers) => {
@@ -30,13 +33,13 @@ export default () => {
 
                 setNotification({
                     isVisible: true,
-                    message: 'Your email sent successfully!',
+                    message: `${t('notificationSuccess')}`,
                     severity: 'success'
                 });
             })
             .catch(() => setNotification({
                 isVisible: true,
-                message: 'We could not your send email! If this problem repeats, contact local administrator.',
+                message: `${t('notificationError')}`,
                 severity: 'error'
             }))
             .finally(() => formikHelpers.setSubmitting(false));
@@ -61,21 +64,21 @@ export default () => {
 
                                 <Typography variant="h6"
                                             sx={{textAlign: 'left'}}>
-                                    Email us</Typography>
+                                    {t('emailUs')}</Typography>
 
                                 <Input name="email"
-                                       label="Your email"
-                                       placeholder="Your email"
+                                       label={t('yourEmail')}
+                                       placeholder={t('yourEmail')}
                                        error={props.touched.email && !!props.errors.email}/>
 
                                 <Input name="topic"
-                                       label="Topic"
-                                       placeholder="Topic"
+                                       label={t('topic')}
+                                       placeholder={t('topic')}
                                        error={props.touched.topic && !!props.errors.topic}/>
 
                                 <Input name="message"
-                                       label="Message"
-                                       placeholder="Message"
+                                       label={t('message')}
+                                       placeholder={t('message')}
                                        error={props.touched.message && !!props.errors.message}
                                        multiline/>
 
@@ -93,7 +96,7 @@ export default () => {
                                                 variant="contained"
                                                 type="submit"
                                                 color="primary">
-                                            Send</Button>
+                                            {t('send')}</Button>
                                 }
                             </Box>
 

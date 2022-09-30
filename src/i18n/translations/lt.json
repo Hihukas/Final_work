@@ -1,0 +1,95 @@
+{
+  "footer": {
+    "copyright": "Autorių teisės priklauso",
+    "allRightsReserved": "Visos teisės saugomos."
+  },
+  "header": {
+    "home": "Pagrindinis puslapis",
+    "addNewProject": "Pridėti naują projektą",
+    "login": "Prisijungti",
+    "logout": "Atsijungti"
+  },
+  "login": {
+    "login": "Prisijungti",
+    "username": "Vartotojo vardas",
+    "password": "Slaptažodis",
+    "usernameRequired": "Vartotojo vardas privalomas.",
+    "passwordRequired": "Slaptažodis privalomas.",
+    "newToConstruction": "Pirmą kartą construction?",
+    "registration": "Registracija"
+  },
+  "registration": {
+    "username": "Vartotojo vardas",
+    "usernameMin": "Vartotojo vardas turėtų būti ne trumpesnis nei 3 raidės.",
+    "usernameMax": "Vartotojo vardas turėtų būti ne ilgesnis nei 20 raidžių.",
+    "password": "Slaptažodis",
+    "passwordMin": "Slaptažodis turėtų būti ne trumpesnis nei 5 simboliai.",
+    "passwordMax": "Slaptažodis turėtų būti ne ilgesnis nei 20 simbolių.",
+    "repeatPassword": "Pakartoti slaptažodį",
+    "passwordsNotEqual": "Slaptažodžiai nesutampa!",
+    "usernameRequired": "Vartotojo vardas privalomas.",
+    "passwordRequired": "Slaptažodis privalomas.",
+    "repeatPasswordRequired": "Slaptažodžio pakartojimas privalomas.",
+    "registration": "Registracija",
+    "register": "Registruotis"
+  },
+  "project": {
+    "title": "Antraštė",
+    "description": "Aprašymas",
+    "titleRequired": "Antraštė privaloma.",
+    "descriptionRequired": "Aprašymas privalomas.",
+    "titleMin": "Antraštė turi būti ne trumpesnė nei 3 simboliai.",
+    "titleMax": "Antraštė turi būti ne ilgesnė nei 50 simbolių.",
+    "notificationSuccess": "Projektas sukurtas sėkmingai!",
+    "notificationError": "Projektas nebuvo sukurtas! Jei ši klaida kartosis, susisiekite su administratoriumi.",
+    "addNewProject": "Pridėti naują projektą",
+    "selectedPhotos": "Pasirinktos nuotraukos:",
+    "add": "Pridėti",
+    "upload": "Įkelti"
+  },
+  "aboutUs": {
+    "aboutUs": "APIE MUS"
+  },
+  "information": {
+    "contactUs": "SUSISIEKITE SU MUMIS",
+    "followUs": "SEKITE MUS",
+    "address": "Klaipėda, Lietuva"
+  },
+  "map": {
+    "map": "Negalėjome užkrauti žemėlapio."
+  },
+  "email": {
+    "yourEmail": "Jūsų elektroninis paštas",
+    "topic": "Tema",
+    "message": "Žinutė",
+    "invalidEmail": "Netinkamas elektroninis paštas.",
+    "emailRequired": "Elektroninis paštas privalomas.",
+    "topicMin": "Tema turi būti ne trumpesnė nei 5 simboliai.",
+    "topicMax": "Tema turi būti ne ilgesnė nei 50 simbolių.",
+    "topicRequired": "Tema privaloma.",
+    "messageMax": "Žinutė turi būti ne ilgesnė nei 250 simbolių..",
+    "messageRequired": "Žinutė privaloma.",
+    "notificationSuccess": "Jūsų elektroninis laiškas išsiųstas sėkmingai!",
+    "notificationError": "Mes negalėjome išsiųsti jūsų elektroninio laiško! Jei ši klaida kartosis, susisiekite su administratoriumi.",
+    "emailUs": "Parašykite mums elektroninį laišką",
+    "send": "Siųsti"
+  },
+  "projects": {
+    "getProjectsError": "Negalėjome atvaizduoti projektų! Jei ši klaida kartosis, susisiekite su administratoriumi.",
+    "emptyProjectsError": "Nebuvo pridėta jokių projektų!",
+    "ourProjects": "MŪSŲ PROJEKTAI"
+  },
+  "detailedProject": {
+    "title": "Antraštė",
+    "description": "Aprašymas",
+    "titleRequired": "Antraštė privaloma.",
+    "descriptionRequired": "Aprašymas privalomas.",
+    "titleMin": "Antraštė turi būti ne trumpesnė nei 3 simboliai.",
+    "titleMax": "Antraštė turi būti ne ilgesnė nei 50 simbolių.",
+    "updateProjectNotificationError": "Projektas nebuvo atnaujintas! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
+    "deletePhotoNotificationError": "Nuotrauka nebuvo ištrinta! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
+    "updatePhotoNotificationError": "Nuotrauka nebuvo atnaujinta! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
+    "loadingProjectNotificationError": "Projektas negali būti atvaizduotas! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
+    "update": "Atnaujinti"
+  }
+}
