@@ -41,7 +41,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Request not found.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))}),
             @ApiResponse(responseCode = "500", description = "Internal server error.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))})
     })
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = CREATE_PROJECT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void createProject(@RequestPart("project") Project project, @RequestPart("multipartFile") MultipartFile[] multipartFiles) {
         photoService.createProject(multipartFiles, project);
     }
@@ -79,7 +79,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "500", description = "Internal server error.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))})
 
     })
-    @PutMapping(value = PROJECT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = UPDATE_PROJECT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateProject(@RequestBody Project project, @PathVariable(projectId) UUID id) {
         project.setId(id);
         projectService.updateProject(project);
@@ -93,7 +93,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Request not found.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))}),
             @ApiResponse(responseCode = "500", description = "Internal server error.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))})
     })
-    @DeleteMapping(value = PROJECT)
+    @DeleteMapping(value = DELETE_PROJECT)
     public void deleteProject(@PathVariable(projectId) UUID id) {
         projectService.deleteProject(id);
     }

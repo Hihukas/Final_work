@@ -22,8 +22,11 @@ public class PhotoEntity {
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     private UUID id;
+    @Column(nullable = false)
     private String photoName;
+    @Column(nullable = false)
     private String mediaType;
+    @Column(nullable = false)
     private long size;
     @Lob
     private byte[] bytes;

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.codeacademy.api.entity.PhotoEntity;
 
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Getter
@@ -14,10 +15,15 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Photo {
     private UUID id;
+    @NotBlank
     private String photoName;
+    @NotBlank
     private String mediaType;
+    @NotBlank
     private long size;
+    @NotBlank
     private byte[] bytes;
+    @NotBlank
     private Project project;
 
     public static Photo convert(PhotoEntity photoEntity) {

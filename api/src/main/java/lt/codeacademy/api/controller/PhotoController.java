@@ -61,7 +61,7 @@ public class PhotoController {
             @ApiResponse(responseCode = "500", description = "Internal server error.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))})
 
     })
-    @PutMapping()
+    @PutMapping(PHOTO_UPDATE)
     public void updatePhoto(@RequestPart("photo") Photo photo, @RequestPart("multipartFile") MultipartFile multipartFile) {
         photoService.updatePhoto(multipartFile, photo);
     }
@@ -74,7 +74,7 @@ public class PhotoController {
             @ApiResponse(responseCode = "404", description = "Request not found.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))}),
             @ApiResponse(responseCode = "500", description = "Internal server error.", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class))})
     })
-    @DeleteMapping(PHOTO)
+    @DeleteMapping(PHOTO_DELETE)
     public void deletePhoto(@PathVariable(photoId) UUID id) {
         photoService.deletePhoto(id);
     }
