@@ -26,16 +26,7 @@ public class User implements UserDetails {
     private String username;
     @NotBlank
     private String password;
-    @NotBlank
-    private String repeatPassword;
     private Set<Role> roles;
-
-    public User(UUID id, String username, String password, Set<Role> roles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
 
     public static User convert(UserEntity userEntity) {
         Set<Role> roles = userEntity.getRoles().stream().map(Role::convert).collect(Collectors.toSet());

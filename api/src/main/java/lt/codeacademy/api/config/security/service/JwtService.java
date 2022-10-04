@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.api.dto.Role;
 import lt.codeacademy.api.dto.User;
 import lt.codeacademy.api.exception.InvalidTokenException;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Slf4j
 @Service
+@Profile("h2")
 public class JwtService {
 
     private final long tokenValidTimeMs;

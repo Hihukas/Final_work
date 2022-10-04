@@ -22,14 +22,13 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public void createUser(User user){
+    public void createUser(User user) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of(new Role(UUID.fromString("7f74bb02-9f14-43ce-8b28-8c0c889d1558"), "USER")));
 
         userRepository.save(UserEntity.convert(user));
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

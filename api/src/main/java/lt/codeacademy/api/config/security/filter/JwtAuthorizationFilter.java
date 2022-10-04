@@ -1,6 +1,7 @@
 package lt.codeacademy.api.config.security.filter;
 
 import lt.codeacademy.api.config.security.service.JwtService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Profile("h2")
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private static final String BEARER = "Bearer ";
 

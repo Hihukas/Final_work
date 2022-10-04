@@ -4,8 +4,10 @@ import lt.codeacademy.api.config.security.filter.JwtAuthenticationFilter;
 import lt.codeacademy.api.config.security.filter.JwtAuthorizationFilter;
 import lt.codeacademy.api.config.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @Configuration
+@Profile("h2")
 public class Security {
     private final String h2Path;
 
@@ -31,7 +34,7 @@ public class Security {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/projects","/api/projects/*", "/api/photos", "/api/photos/*", "/api/sendEmail")
+                .antMatchers("/projects","/projects/*", "/photos", "/photos/*", "/registration", "/swagger-ui/**", "/v3/api-docs/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -47,6 +50,6 @@ public class Security {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().antMatchers(h2Path);
+        return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).antMatchers(h2Path);
     }
 }
