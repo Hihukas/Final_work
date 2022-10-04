@@ -1,10 +1,13 @@
 import {Form, Formik} from "formik";
 import Input from "./Input";
 import * as Yup from 'yup';
-import {Button, CircularProgress, Stack, Box, Typography, Paper} from "@mui/material";
+import {Button, CircularProgress, Stack, Box, Typography, Paper, Alert} from "@mui/material";
 import {useTranslation} from "react-i18next";
+import {registration} from "../../../../api/userApi";
+import {useState} from "react";
 
 export default () => {
+    const [notification, setNotification] = useState({isVisible: false});
     const {t} = useTranslation('registration');
 
     const registrationValidationSchema = Yup.object().shape({
@@ -21,6 +24,24 @@ export default () => {
             .required(`${t('repeatPasswordRequired')}`)
     });
 
+    const onRegistration = (data, formikHelpers) => {
+        registration(data)
+            .then(() => {
+                setNotification({
+                    isVisible: true,
+                    message: `${t('registrationNotificationSuccess')}`,
+                    severity: 'success'
+                });
+                formikHelpers.resetForm();
+            })
+            .catch(() => setNotification({
+                isVisible: true,
+                message: `${t('registrationNotificationError')}`,
+                severity: 'error'
+            }))
+            .finally(() => formikHelpers.setSubmitting(false));
+    }
+
     return (
         <Box sx={{
             height: 'calc(100vh - 50px)',
@@ -31,15 +52,7 @@ export default () => {
         }}>
 
             <Formik initialValues={{username: '', password: '', repeatPassword: ''}}
-                    onSubmit={(values, formikHelpers) => {
-                        formikHelpers.setSubmitting(true);
-
-                        setTimeout(() => {
-                            formikHelpers.setSubmitting(false);
-                            formikHelpers.resetForm();
-                        }, 5000)
-
-                    }}
+                    onSubmit={onRegistration}
                     validationSchema={registrationValidationSchema}
             >
 
@@ -71,6 +84,11 @@ export default () => {
                                        placeholder={t('repeatPassword')}
                                        error={props.touched.repeatPassword && !!props.errors.repeatPassword}
                                        type="password"/>
+
+                                {
+                                    notification.isVisible &&
+                                    <Alert severity={notification.severity}>{notification.message}</Alert>
+                                }
 
                             </Stack>
 

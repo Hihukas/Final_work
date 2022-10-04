@@ -10,12 +10,12 @@ export default () => {
 
             <Button sx={{maxHeight: '24px', minWidth: '24px', width: '24px', mr: '20px'}}
                     onClick={() => i18n.changeLanguage('en')}>
-                <img src={require('../../static/images/languages/en.png')}/>
+                <img src={require('../../static/images/languages/en.png')} alt={""}/>
             </Button>
 
             <Button sx={{maxHeight: '24px', minWidth: '24px', width: '24px', pr: '20px'}}
                     onClick={() => i18n.changeLanguage('lt')}>
-                <img src={require('../../static/images/languages/lt.png')}/>
+                <img src={require('../../static/images/languages/lt.png')} alt={""}/>
             </Button>
 
         </Box>

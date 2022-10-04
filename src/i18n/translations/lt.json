@@ -16,7 +16,9 @@
     "usernameRequired": "Vartotojo vardas privalomas.",
     "passwordRequired": "Slaptažodis privalomas.",
     "newToConstruction": "Pirmą kartą construction?",
-    "registration": "Registracija"
+    "registration": "Registracija",
+    "loginNotificationError": "Netinkamas prisijungimo vardas arba slaptažodis!",
+    "logout": "Atsijungti"
   },
   "registration": {
     "username": "Vartotojo vardas",
@@ -31,7 +33,9 @@
     "passwordRequired": "Slaptažodis privalomas.",
     "repeatPasswordRequired": "Slaptažodžio pakartojimas privalomas.",
     "registration": "Registracija",
-    "register": "Registruotis"
+    "register": "Registruotis",
+    "registrationNotificationError": "Mes negalėjome sukurti jūsų paskyros! Jei ši klaida kartosis, susisiekite su administratoriumi.",
+    "registrationNotificationSuccess": "Jūsų paskyra sukurta sėkmingai! Galite prisijungti."
   },
   "project": {
     "title": "Antraštė",
@@ -72,7 +76,8 @@
     "notificationSuccess": "Jūsų elektroninis laiškas išsiųstas sėkmingai!",
     "notificationError": "Mes negalėjome išsiųsti jūsų elektroninio laiško! Jei ši klaida kartosis, susisiekite su administratoriumi.",
     "emailUs": "Parašykite mums elektroninį laišką",
-    "send": "Siųsti"
+    "send": "Siųsti",
+    "toSend": "Jūs turite prisijungti, kad galėtumėte siųsti elektroninį laišką!"
   },
   "projects": {
     "getProjectsError": "Negalėjome atvaizduoti projektų! Jei ši klaida kartosis, susisiekite su administratoriumi.",
@@ -90,6 +95,7 @@
     "deletePhotoNotificationError": "Nuotrauka nebuvo ištrinta! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
     "updatePhotoNotificationError": "Nuotrauka nebuvo atnaujinta! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
     "loadingProjectNotificationError": "Projektas negali būti atvaizduotas! Jei ši klaida pasikartos, susisiekite su administratoriumi.",
-    "update": "Atnaujinti"
+    "update": "Atnaujinti",
+    "deleteProjectNotificationError": "Projektas nebuvo ištrintas! Jei ši klaida pasikartos, susisiekite su administratoriumi."
   }
 }

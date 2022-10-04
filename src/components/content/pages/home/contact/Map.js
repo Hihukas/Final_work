@@ -7,7 +7,7 @@ export default () => {
 
     const {isLoaded} = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyC0ppA0ConesN58kwjCjiF4DsxxpH3ezO8"
+        googleMapsApiKey: ""
     })
 
     return isLoaded ? (

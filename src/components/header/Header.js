@@ -2,20 +2,24 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {Avatar} from "@mui/material";
-import {useState} from "react";
 import LanguageSwitcher from "../languages/Languages";
 import {useTranslation} from "react-i18next";
+import {useDispatch, useSelector} from "react-redux";
+import {removeUser} from "../../store/slices/user/userSlice";
 
 export default function NavTabs() {
     const logo = require('../../static/images/logo/construction.png');
-    const [value, setValue] = useState(0);
     const {t} = useTranslation('header');
+    const user = useSelector(state => state.user.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleChange = (event, value) => {
-        setValue(value)
-    };
+    const onLogout = () => {
+        dispatch(removeUser());
+        navigate("/");
+    }
 
     return (
 
@@ -33,17 +37,22 @@ export default function NavTabs() {
         }}>
 
             <Avatar variant="square" src={logo} to="/" component={NavLink}
-                    sx={{height: '48px', pl: '20px', ":hover": {transform: 'scale(1.05)'}}}
-                    onClick={() => setValue(0)}/>
+                    sx={{height: '48px', pl: '20px', ":hover": {transform: 'scale(1.05)'}}}/>
 
-            <Box sx={{width: '100%', pr: '60px', pl: '88px'}}>
+            <Box sx={{
+                width: '100%',
+                pr: '60px',
+                pl: '88px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
 
-                <Tabs value={value} onChange={handleChange} aria-label="nav tabs example" indicatorColor="primary"
-                      textColor="inherit" centered>
-                    <Tab label={t('home')} to="/" component={NavLink}/>
-                    <Tab label={t('addNewProject')} to="/project" component={NavLink}/>
-                    <Tab label={t('login')} to="/login" component={NavLink}/>
-                </Tabs>
+                <Tab label={t('home')} to="/" component={NavLink} sx={{color: '#000000'}}/>
+                {user?.roles.includes('ADMIN') &&
+                    <Tab label={t('addNewProject')} to="/project" component={NavLink} sx={{color: '#000000'}}/>}
+                {user ? <Tab label={t('logout')} onClick={onLogout} sx={{color: '#b71c1c'}}/> :
+                    <Tab label={t('login')} to="/login" component={NavLink} sx={{color: '#009624'}}/>}
 
             </Box>
 

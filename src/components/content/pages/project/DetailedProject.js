@@ -1,4 +1,4 @@
-import {NavLink, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {deleteProject, getProject, updateProject} from "../../../../api/projectApi";
 import {Alert, Button, CircularProgress, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
@@ -12,9 +12,11 @@ import {Form, Formik} from "formik";
 import Input from "../forms/Input";
 import * as Yup from "yup";
 import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
 
 export default () => {
     const {t} = useTranslation('detailedProject');
+    const user = useSelector(state => state.user.user);
 
     const projectValidationSchema = Yup.object().shape({
         title: Yup.string()
@@ -28,12 +30,14 @@ export default () => {
     const {projectId} = useParams();
     const [loading, setLoading] = useState(true);
     const [loadingNotification, setLoadingNotification] = useState({isVisible: false});
-    const [deleteNotification, setDeleteNotification] = useState({isVisible: false});
+    const [deletePhotoNotification, setDeletePhotoNotification] = useState({isVisible: false});
+    const [deleteProjectNotification, setDeleteProjectNotification] = useState({isVisible: false});
     const [updatePhotoNotification, setUpdatePhotoNotification] = useState({isVisible: false});
     const [updateProjectNotification, setUpdateProjectNotification] = useState({isVisible: false});
     const [project, setProject] = useState({});
     const [photos, setPhotos] = useState([]);
     const [updateProjectText, setUpdateProjectText] = useState({isVisible: false});
+    const navigate = useNavigate();
 
 
     const startUpdateProjectText = () => {
@@ -63,7 +67,7 @@ export default () => {
     const removePhoto = (id) => {
         deletePhoto(id)
             .then(() => setPhotos((current) => current.filter((photo) => photo.id !== id)))
-            .catch(() => setDeleteNotification({
+            .catch(() => setDeletePhotoNotification({
                 isVisible: true,
                 message: `${t('deletePhotoNotificationError')}`,
                 severity: 'error'
@@ -79,7 +83,7 @@ export default () => {
                 resolve(reader.result);
             };
 
-            reader.onerror =(error) => reject(error);
+            reader.onerror = (error) => reject(error);
         });
     };
 
@@ -111,7 +115,6 @@ export default () => {
         })], {type: 'application/json'}));
 
 
-
         updatePhoto(data)
             .then(() => {
                 changePhoto(photo, bytes(base64), selectedPhoto);
@@ -121,6 +124,17 @@ export default () => {
                 message: `${t('updatePhotoNotificationError')}`,
                 severity: 'error'
             }))
+    }
+
+    const onDeleteProject = (id) => {
+        deleteProject(id).then(() => {
+            navigate("/");
+        }).catch(() => setDeleteProjectNotification({
+            isVisible: true,
+            message: `${t('deleteProjectNotificationError')}`,
+            severity: 'error'
+        }));
+
     }
 
     useEffect(() => {
@@ -173,28 +187,30 @@ export default () => {
                                             loading="lazy"
                                         />
 
-                                        <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
+                                        {user?.roles.includes('ADMIN') &&
+                                            <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
 
-                                            <Button component="label"
-                                                    sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
+                                                <Button component="label"
+                                                        sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
 
-                                                <UpdateIcon sx={{color: '#43a047'}}/>
+                                                    <UpdateIcon sx={{color: '#43a047'}}/>
 
-                                                <input hidden accept="image/*" type="file" name="multipartFile"
-                                                       id="multipartFile"
-                                                       onChange={(event) => onUpdatePhoto(event, index, photo)}
-                                                />
+                                                    <input hidden accept="image/*" type="file" name="multipartFile"
+                                                           id="multipartFile"
+                                                           onChange={(event) => onUpdatePhoto(event, index, photo)}
+                                                    />
 
-                                            </Button>
+                                                </Button>
 
-                                            <Button sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
+                                                <Button sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
 
-                                                <DeleteIcon sx={{color: '#ba000d'}}
-                                                            onClick={() => removePhoto(photo.id)}/>
+                                                    <DeleteIcon sx={{color: '#ba000d'}}
+                                                                onClick={() => removePhoto(photo.id)}/>
 
-                                            </Button>
+                                                </Button>
 
-                                        </Box>
+                                            </Box>
+                                        }
 
 
                                     </ImageListItem>
@@ -204,19 +220,15 @@ export default () => {
                             </ImageList>
 
                             {
-                                deleteNotification.isVisible &&
-                                <Alert severity={deleteNotification.severity}>{deleteNotification.message}</Alert>
+                                deletePhotoNotification.isVisible &&
+                                <Alert
+                                    severity={deletePhotoNotification.severity}>{deletePhotoNotification.message}</Alert>
                             }
 
                             {
                                 updatePhotoNotification.isVisible &&
                                 <Alert
                                     severity={updatePhotoNotification.severity}>{updatePhotoNotification.message}</Alert>
-                            }
-
-                            {
-                                loadingNotification.isVisible &&
-                                <Alert severity={loadingNotification.severity}>{loadingNotification.message}</Alert>
                             }
 
                             <Formik initialValues={{title: '', description: ''}}
@@ -322,29 +334,43 @@ export default () => {
 
                             </Formik>
 
-                            <Box sx={{display: 'flex', justifyContent: 'end', mt: 2}}>
+                            {user?.roles.includes('ADMIN') &&
+                                <Box sx={{display: 'flex', justifyContent: 'end', mt: 2}}>
 
-                                <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
+                                    <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
 
-                                    <Button onClick={startUpdateProjectText}
-                                            sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
+                                        <Button onClick={startUpdateProjectText}
+                                                sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}>
 
-                                        <UpdateIcon sx={{color: '#43a047'}}/>
+                                            <UpdateIcon sx={{color: '#43a047'}}/>
+
+                                        </Button>
+
+                                    </Box>
+
+                                    <Button sx={{maxHeight: '24px', minWidth: '24px', width: '24px'}}
+                                            onClick={() => onDeleteProject(projectId)}>
+
+                                        <DeleteIcon sx={{color: '#ba000d'}}/>
 
                                     </Button>
 
                                 </Box>
-
-                                <Box sx={{width: '24px', height: '24px'}} to={"/"} component={NavLink}>
-
-                                    <DeleteIcon sx={{color: '#ba000d'}}
-                                                onClick={() => deleteProject(project.id)}/>
-
-                                </Box>
-
-                            </Box>
+                            }
 
                         </Box>
+
+                        {
+                            deleteProjectNotification.isVisible &&
+                            <Alert sx={{m: 2}}
+                                   severity={deleteProjectNotification.severity}>{deleteProjectNotification.message}</Alert>
+                        }
+
+                        {
+                            loadingNotification.isVisible &&
+                            <Alert sx={{m: 2}}
+                                   severity={loadingNotification.severity}>{loadingNotification.message}</Alert>
+                        }
 
                     </Paper>
             }

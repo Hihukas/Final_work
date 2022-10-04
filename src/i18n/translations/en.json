@@ -16,7 +16,9 @@
     "usernameRequired": "Username is required.",
     "passwordRequired": "Password is required.",
     "newToConstruction": "New to construction?",
-    "registration": "Registration"
+    "registration": "Registration",
+    "loginNotificationError": "Incorrect username or password!",
+    "logout": "Logout"
   },
   "registration": {
     "username": "Username",
@@ -31,7 +33,9 @@
     "passwordRequired": "Password is required.",
     "repeatPasswordRequired": "Password is required.",
     "registration": "Registration",
-    "register": "Register"
+    "register": "Register",
+    "registrationNotificationError": "We could not create your account! If this problem repeats, contact local administrator.",
+    "registrationNotificationSuccess": "Your account created successfully! You can login now."
   },
   "project": {
     "title": "Title",
@@ -72,7 +76,8 @@
     "notificationSuccess": "Your email sent successfully!",
     "notificationError": "We could not your send email! If this problem repeats, contact local administrator.",
     "emailUs": "Email us",
-    "send": "Send"
+    "send": "Send",
+    "toSend": "You have to login to be able send email!"
   },
   "projects": {
     "getProjectsError": "Projects could not be displayed! If this problem repeats, contact local administrator.",
@@ -90,6 +95,7 @@
     "deletePhotoNotificationError": "Photo could not be deleted! If this problem repeats, contact local administrator.",
     "updatePhotoNotificationError": "Photo could not be updated! If this problem repeats, contact local administrator.",
     "loadingProjectNotificationError": "Project could not be displayed! If this problem repeats, contact local administrator.",
-    "update": "Update"
+    "update": "Update",
+    "deleteProjectNotificationError": "Project wasn't deleted! If this problem repeats, contact local administrator."
   }
 }

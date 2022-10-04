@@ -5,9 +5,11 @@ import {useState} from "react";
 import Input from "../../forms/Input";
 import {sendEmail} from "../../../../../api/emailApi";
 import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
 
 export default () => {
     const {t} = useTranslation('email');
+    const user = useSelector(state => state.user.user);
 
     const emailValidationSchema = Yup.object().shape({
         email: Yup.string()
@@ -89,17 +91,18 @@ export default () => {
 
                             </Stack>
 
-                            <Box sx={{mt: 2, textAlign: 'center'}}>
-                                {
-                                    props.isSubmitting ? <CircularProgress size={30}/> :
-                                        <Button size="medium"
-                                                variant="contained"
-                                                type="submit"
-                                                color="primary">
-                                            {t('send')}</Button>
-                                }
-                            </Box>
-
+                            {user?.roles.includes('USER') ?
+                                <Box sx={{mt: 2, textAlign: 'center'}}>
+                                    {
+                                        props.isSubmitting ? <CircularProgress size={30}/> :
+                                            <Button size="medium"
+                                                    variant="contained"
+                                                    type="submit"
+                                                    color="primary">
+                                                {t('send')}</Button>
+                                    }
+                                </Box> : <Alert severity="error" sx={{mt: 2}}>{t('toSend')}</Alert>
+                            }
                         </Paper>
 
                     </Form>
